@@ -64,11 +64,6 @@ function plotrosa(ordem, x, y)
     plot(x(i), y(i), 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], 'DisplayName', 'Pontos')
     hold on;
   endfor
-  %plot(x, y, 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490])
-  %plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], x, polyval(p, x), 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490]);
-  %plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490]);
   plot(x, polyval(p, x), 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490])
   hold off;
-  % Curva fit: 
-  %polyfit
 endfunction
