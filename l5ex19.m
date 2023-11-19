@@ -12,7 +12,7 @@ function l5ex19()
   coeficientes = elementos(ordem, x, y)
   [r2, coeficiteDeterminacao] = determinacao(coeficientes, x, y)
   
-  plotrosa(x, y)
+  plotrosa(ordem, x, y)
 endfunction
 
 function x = elementos(ordem, x, y)
@@ -54,15 +54,20 @@ endfunction
 function y = funcao(coeficientes, x)
   y = 0;
   for i = numel(coeficientes):-1:1 % Decrementa os coeficientes
-    y = y + coeficientes(i) * x^(i - 1); % Somatorio???
+    y = y + coeficientes(i) * x^(i - 1);
   endfor
 endfunction
 
-function plotrosa(x,y)
+function plotrosa(ordem, x, y)
+  p = polyfit(x, y, ordem)
   for i = 1:numel(x)
     plot(x(i), y(i), 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], 'DisplayName', 'Pontos')
     hold on;
   endfor
+  %plot(x, y, 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490])
+  %plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], x, polyval(p, x), 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490]);
+  %plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490]);
+  plot(x, polyval(p, x), 'linewidth', 4, 'color', [0.9922, 0.0000, 0.5490])
   hold off;
   % Curva fit: 
   %polyfit
