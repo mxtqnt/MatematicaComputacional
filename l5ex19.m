@@ -13,9 +13,7 @@ function l5ex19()
   for i = 1:numel(x)
     fprintf("(%d, %d) ", x(i), y(i))    
   endfor
-  
-  fprintf("\nResultaram nos coeficientes: \n")
-  disp (coeficientes)
+
   fprintf("Gerando a função: \nf(x) = ")
   fprintf("%d + ", coeficientes(1))
   for i = 2:numel(coeficientes)
@@ -26,7 +24,7 @@ function l5ex19()
   endfor
   
   fprintf("\nEstimando x para %d o polinomio resulta em: %d\nR2=%d, R=%d\n", xdef, funcao(coeficientes, xdef), r2, coeficiteDeterminacao);
-  plotrosa(ordem, x, y);
+  plotrosa(ordem, x, y, coeficientes, xdef);
 endfunction
 
 function x = elementos(ordem, x, y)
@@ -68,16 +66,28 @@ endfunction
 function y = funcao(coeficientes, xdef)
   y = 0;
   for i = numel(coeficientes):-1:1 % Decrementa os coeficientes
-    y = y + coeficientes(i) * xdef^(i - 1);
+    y = y + coeficientes(i) * xdef^(i - 1); % Soma acumulativa
   endfor
 endfunction
 
-function plotrosa(ordem, x, y)
-  p = polyfit(x, y, ordem);
-  plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490],'linewidth', 1, 'color', [1, 1, 1], 'DisplayName', 'Pontos');
-  hold on;
+function plotrosa(ordem, x, y, coeficientes, pontim)
+  xauxiliar = (x(1)):0.1:(x(end));
+  yauxiliar = (x(1)):0.1:(x(end));
+  
+  for i = 1:numel(xauxiliar)
+    yauxiliar(i) = funcao(coeficientes, xauxiliar(i));
+  endfor
   grid on;
-  plot(x, polyval(p, x), 'linewidth', 2, 'color', [0.9922, 0.0000, 0.5490]);
-  legend("Pontos", "Polinomio");
+  plot(xauxiliar, yauxiliar, 'linewidth', 2, 'color', [0.9922, 0.0000, 0.5490]);
+  hold on;
+  plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], 'LineStyle', 'none');
+  hold on;
+  plot(pontim, (funcao(coeficientes, pontim)), 'marker', 'o', 'markersize', 10, 'markerfacecolor', 'b', 'LineStyle', 'none');
   hold off;
 endfunction
+
+
+% Titulo grafico
+% Legenda
+% x e y label
+
