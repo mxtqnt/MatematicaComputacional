@@ -77,17 +77,16 @@ function plotrosa(ordem, x, y, coeficientes, pontim)
   for i = 1:numel(xauxiliar)
     yauxiliar(i) = funcao(coeficientes, xauxiliar(i));
   endfor
+  plot(xauxiliar, yauxiliar, 'linewidth', 5, 'color', [0.9922, 0.0000, 0.5490]);
+  hold on;
+  plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.5019607843,0,0.7058823529], 'LineStyle', 'none');
+  hold on;
+  plot(pontim, (funcao(coeficientes, pontim)), 'marker', 'o', 'markersize', 15, 'markerfacecolor', 'b', 'LineStyle', 'none');
+  title(sprintf('Polinomio de ordem %d', ordem))
+  flegend = legend('Polinomio','Dados','x = 5.5', 'Location', 'northeast');
+  set(flegend, 'FontSize', 15);
+  xlabel("x");
+  ylabel("y");
   grid on;
-  plot(xauxiliar, yauxiliar, 'linewidth', 2, 'color', [0.9922, 0.0000, 0.5490]);
-  hold on;
-  plot(x, y, 'marker', 'o', 'markersize', 10, 'markerfacecolor', [0.9922, 0.0000, 0.5490], 'LineStyle', 'none');
-  hold on;
-  plot(pontim, (funcao(coeficientes, pontim)), 'marker', 'o', 'markersize', 10, 'markerfacecolor', 'b', 'LineStyle', 'none');
   hold off;
 endfunction
-
-
-% Titulo grafico
-% Legenda
-% x e y label
-
